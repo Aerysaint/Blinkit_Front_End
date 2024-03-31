@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WELCOME PAGE</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 400px;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      font-size: 16px;
+      background-color: #f9f9f9;
+    }
+
+    option {
+      font-size: 16px;
+    }
+
+    .button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0070c9;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #005ca3;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Welcome Page</h1>
+  <label for="job">Login as:</label>
+  <select name="job" id="job">
+    <option value="admin">Administrator</option>
+    <option value="customer">Customer</option>
+    <option value="delAgent">Delivery Partner</option>
+    <option value="vendor">Vendor</option>
+  </select>
+  <button class="button" onclick="handleLogin()">Login</button>
+</div>
+
+<script>
+  function handleLogin() {
+    var selectedValue = document.getElementById("job").value;
+
+    if (selectedValue === "admin") {
+      // Redirect to the admin login page
+      window.location.href = "admin_login.html";
+    } else if (selectedValue === "customer") {
+      // Redirect to the customer login page
+      window.location.href = "customer_login.html";
+    } else if (selectedValue === "delAgent") {
+      // Redirect to the delivery partner login page
+      window.location.href = "delivery_login.html";
+    } else if (selectedValue === "vendor") {
+      // Redirect to the vendor login page
+      window.location.href = "vendor_login.html";
+    }
+  }
+</script>
+</body>
+</html>

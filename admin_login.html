@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 100px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #0070c9;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #005ca3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Admin Login</h2>
+  <form onsubmit="handleLogin(event)">
+    <label for="email">AdminID:</label>
+    <input type="text" id="email" name="email" required>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <input type="submit" value="Login">
+  </form>
+</div>
+
+<script>
+  async function handleLogin(event) {
+    event.preventDefault(); // Prevent form submission
+
+    // Retrieve the values from the form
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+
+    // Store the values in JavaScript variables
+    var loginDetails = {
+      email: email,
+      password: password
+    };
+
+    // You can now access loginDetails.email and loginDetails.password in your JavaScript code
+    console.log("Email: " + loginDetails.email);
+    console.log("Password: " + loginDetails.password);
+
+    // Fetch the admin's password from the server
+    const response = await fetch(`http://192.168.144.1:8000/adminPass?adminID=${loginDetails.email}`);
+    const passData = await response.json();
+    console.log("data : ");
+    console.log(passData);
+    const correctPass = passData[0].toString();
+    console.log(correctPass);
+    // console.log(typeof passData[0]);
+    // console.log(typeof loginDetails.password);
+    // Check if the entered password matches the stored password
+    if (loginDetails.password === correctPass) {
+      // Redirect to order.html
+      window.location.href = "order.html";
+    } else {
+      // Prompt the user to try again
+      alert("Incorrect password. Please try again.");
+      // Clear the password field
+      document.getElementById("password").value = "";
+    }
+  }
+</script>
+
+</body>
+</html>

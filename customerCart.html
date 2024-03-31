@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Cart</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      border-bottom: 1px solid #dee2e6;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    #total-section {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    #total-section p {
+      font-size: 18px;
+      color: #007bff;
+      margin: 0;
+    }
+
+    #total-amount {
+      font-weight: bold;
+    }
+
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .checkout-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>My Cart</h2>
+  <table id="cart-table">
+    <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Brand</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </tr>
+    </thead>
+    <tbody id="cart-body">
+    <!-- Cart items will be dynamically generated here -->
+    </tbody>
+  </table>
+  <div id="total-section">
+    <p>Total: $<span id="total-amount">0.00</span></p>
+  </div>
+  <button class="checkout-btn" onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+  // Fetch cart data from backend and populate the table
+  var totalAmount = 0;
+  async function fetchCartData() {
+    try {
+      const response = await fetch(`http://192.168.144.1:8000/customerCart?customerID=1`);
+      const cartData = await response.json();
+
+      const cartBody = document.getElementById('cart-body');
+      const totalAmountElement = document.getElementById('total-amount');
+
+      cartBody.innerHTML = ''; // Clear previous content
+      totalAmount = 0
+      cartData.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item[1]}</td>
+          <td>${item[2]}</td>
+          <td>$${item[3]}</td>
+          <td>${item[4]}</td>
+          <td>$${(item[3] * item[4]).toFixed(2)}</td>
+        `;
+        cartBody.appendChild(row);
+
+        // Calculate total amount
+        totalAmount += item[3] * item[4];
+      });
+
+      // Update total amount
+      totalAmountElement.textContent = totalAmount.toFixed(2);
+    } catch (error) {
+      console.error('Error fetching cart data:', error);
+    }
+  }
+
+  // Call fetchCartData when the page loads
+  window.addEventListener('load', fetchCartData);
+
+  async function checkout() {
+    console.log(totalAmount.toFixed(2));
+    const res = await fetch(`http://192.168.144.1:8000/checkout?customerID=1`);
+    const data = await res.json();
+    window.location.href = "checkout.html";
+  }
+</script>
+
+</body>
+</html>

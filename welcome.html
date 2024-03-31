@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Blinkit</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    .intro-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .intro-text {
+      font-size: 3em;
+      font-weight: bold;
+      color: #fff;
+      margin: 0;
+      animation: colorChange 6s infinite alternate;
+      transition: font-size 1s ease;
+    }
+
+    @keyframes colorChange {
+      0% { color: #ff0000; }
+      25% { color: #00ff00; }
+      50% { color: #0000ff; }
+      75% { color: #ffff00; }
+      100% { color: #ff00ff; }
+    }
+  </style>
+</head>
+<body>
+<div class="intro-container">
+  <h1 class="intro-text">Welcome to Blinkit</h1>
+</div>
+
+<script>
+  setTimeout(function(){
+    window.location.href = "index.html"; // Redirect after animation ends
+  }, 6000); // 6 seconds for the animation
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+</head>
+<body>
+<h1>Welcome Admin</h1>
+<label for="adminOptions">Choose an option:</label>
+<select name="adminOptions" id="adminOptions" onchange="handleAdminOption()">
+  <option value="order">Inventory Analysis</option>
+<!--  <option value="inventory">Inventory Management</option>-->
+  <option value="analysis">Customer Analysis</option>
+</select>
+
+<script>
+  function handleAdminOption() {
+    var selectedOption = document.getElementById("adminOptions").value;
+    if (selectedOption === "order") {
+      // Redirect to order page
+      window.location.href = "order.html";
+    } else if (selectedOption === "inventory") {
+      // Redirect to inventory management page
+      window.location.href = "inventory.html";
+    } else if (selectedOption === "analysis") {
+      // Redirect to customer analysis page
+      window.location.href = "analysis.html";
+    }
+  }
+</script>
+</body>
+</html>
+</title>
+</head>
+<body>
+
+</body>
+</html>
